@@ -42,3 +42,20 @@ hook.Add("VehicleMove", "EngineOnOff", function(ply, veh)
     end
 
 end)
+
+hook.Add( "EntityTakeDamage", "EntityDamageExample2", function( target, dmginfo )
+
+    if ( target:IsVehicle() ) then
+ 
+        local ply = target:GetDriver()
+        print("is running")
+        if ( IsValid(ply) && dmginfo:GetDamage() > 1 && ply:GetNWBool("Seatbelt", false) == false ) then
+            dmginfo:SetDamage(dmginfo:GetDamage() * 50)
+            ply:TakeDamageInfo(dmginfo)
+            dmginfo:SetDamage(0)
+        
+        end
+
+    end
+
+end )
