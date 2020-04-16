@@ -1,6 +1,6 @@
 hook.Add("PlayerButtonDown", "SeatbeltsOnEverybody", function(ply,key)
 
-    if ply:IsValid() and ply:InVehicle() and key == KEY_J then
+    if ply:IsValid() && ply:InVehicle() && key == KEY_J then
         if ply:GetNWBool("Seatbelt", false) == false then
             sound.Play( "vehiclesounds/bucklein.wav", ply:GetPos(), 75, 150, 0.5 )
         elseif ply:GetNWBool("Seatbelt", true) == true then
@@ -9,7 +9,7 @@ hook.Add("PlayerButtonDown", "SeatbeltsOnEverybody", function(ply,key)
         ply:SetNWBool("Seatbelt", !ply:GetNWBool("Seatbelt", false))
     end
 
-    if ply:InVehicle() and key == KEY_H then
+    if ply:InVehicle() && key == KEY_H then
         if ply:GetNWBool("EngineStatus", false) == false then
             sound.Play( "vehiclesounds/enginestart.wav", ply:GetPos(), 75, 90, 1 )
         elseif ply:GetNWBool("EngineStatus", true) == true then
@@ -45,17 +45,12 @@ end)
 
 hook.Add( "EntityTakeDamage", "EntityDamageExample2", function( target, dmginfo )
 
-    if ( target:IsVehicle() ) then
- 
-        local ply = target:GetDriver()
-        print("is running")
-        if ( IsValid(ply) && dmginfo:GetDamage() > 1 && ply:GetNWBool("Seatbelt", false) == false ) then
-            dmginfo:SetDamage(dmginfo:GetDamage() * 50)
-            ply:TakeDamageInfo(dmginfo)
-            dmginfo:SetDamage(0)
-        
+    if ( target:InVehicle() && IsValid(target) && dmginfo:GetDamage() > 5 ) then
+        if target:GetNWBool("Seatbelt", false) == false then
+            dmginfo:SetDamage(80)
+        elseif target:GetNWBool("Seatbelt", true) == true then
+            dmginfo:SetDamage(20)
         end
-
     end
 
 end )
