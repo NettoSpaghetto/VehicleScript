@@ -1,4 +1,4 @@
-#Vehicle Script
+Vehicle Script
 
 Hey guys,
 
