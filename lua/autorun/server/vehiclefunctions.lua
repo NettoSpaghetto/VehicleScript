@@ -33,7 +33,7 @@ hook.Add("CanExitVehicle", "CheckExitVehicle", function(veh, ply)
 end)
 
 hook.Add("VehicleMove", "EngineOnOff", function(ply, veh)
-
+    veh:StartEngine(false)
     if !ply:IsValid() then return end
     if ply:GetNWBool("EngineStatus", false) == true then
         veh:StartEngine(true)
