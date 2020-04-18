@@ -34,9 +34,11 @@ end)
 
 hook.Add("OnEntityCreated", "InitialDisableEngine", function(ent)
 
-    if ent:IsValid() && ent:IsVehicle() then
-        ent:StartEngine(false)
-    end
+    timer.Simple(2, function()
+        if ent:IsValid() && ent:IsVehicle() then
+            ent:StartEngine(false)
+        end
+    end)
 
 end)
 
