@@ -1,3 +1,5 @@
+CreateConVar("SeatbeltChime", 0, number flags, string helptext)
+
 hook.Add("PlayerButtonDown", "SeatbeltsOnEverybody", function(ply,key)
 
     if ply:IsValid() && ply:InVehicle() && key == KEY_J then
@@ -34,10 +36,11 @@ end)
 
 hook.Add("OnEntityCreated", "InitialDisableEngine", function(ent)
 
-    if ent:IsValid() && ent:IsVehicle() then
-        ent:StartEngine(false)
-    end
-
+    timer.Simple(1, function()
+        if ent:IsValid() && ent:IsVehicle() then
+            ent:StartEngine(false)
+        end
+    end)
 end)
 
 hook.Add("VehicleMove", "EngineOnOff", function(ply, veh)
