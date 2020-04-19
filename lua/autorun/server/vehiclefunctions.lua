@@ -55,7 +55,7 @@ end)
 
 hook.Add( "EntityTakeDamage", "EntityDamageExample2", function( target, dmginfo )
 
-    if ( target:InVehicle() && IsValid(target) && dmginfo:GetDamage() > 5 ) then
+    if ( IsValid(target) && target:IsPlayer() && target:InVehicle() && dmginfo:GetDamage() > 5 ) then
         if target:GetNWBool("Seatbelt", false) == false then
             dmginfo:SetDamage(80)
         elseif target:GetNWBool("Seatbelt", true) == true then
